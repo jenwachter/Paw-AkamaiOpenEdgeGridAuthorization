@@ -77,7 +77,8 @@ function parseuri(str) {
 
 function getSignature(key, request, authorization) {
   var parts = parseuri(request.url);
-  return signHmac256(key, request.method + '\thttps\t' + parts.host + '\t' + parts.path + '\t\t' + hash256(request.body) + '\t' + authorization);
+  var input = request.method + '\thttps\t' + parts.host + '\t' + parts.path + '\t\t\t' + authorization;
+  return signHmac256(key, input);
 }
 
 var AkamaiOpenEdgeGridAuthorization = function () {
