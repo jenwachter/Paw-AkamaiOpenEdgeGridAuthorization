@@ -79,6 +79,8 @@ function getSignature(key, request, authorization) {
   var parts = parseuri(request.url);
 
   var value = request.method + '\thttps\t' + parts.host + '\t' + parts.path + '\t\t';
+  if (parts.query !== "") { value = request.method + '\thttps\t' + parts.host + '\t' + parts.path + '?' + parts.query + '\t\t'; }
+
   if (request.method === 'POST') {
     value += hash256(request.body);
   }
@@ -118,9 +120,9 @@ AkamaiOpenEdgeGridAuthorization.identifier = 'com.jenwachter.PawExtensions.Akama
 AkamaiOpenEdgeGridAuthorization.title = 'Akamai EdgeGrid Authorization';
 AkamaiOpenEdgeGridAuthorization.help = 'https://github.com/jenwachter/Paw-AkamaiOpenEdgeGridAuthorization';
 AkamaiOpenEdgeGridAuthorization.inputs = [
-    DynamicValueInput('client_token', 'Client Token', 'String'),
-    DynamicValueInput('client_secret', 'Client Secret', 'SecureValue'),
-    DynamicValueInput('access_token', 'Access Token', 'String')
+  DynamicValueInput('client_token', 'Client Token', 'String'),
+  DynamicValueInput('client_secret', 'Client Secret', 'SecureValue'),
+  DynamicValueInput('access_token', 'Access Token', 'String')
 ];
 
 registerDynamicValueClass(AkamaiOpenEdgeGridAuthorization);
