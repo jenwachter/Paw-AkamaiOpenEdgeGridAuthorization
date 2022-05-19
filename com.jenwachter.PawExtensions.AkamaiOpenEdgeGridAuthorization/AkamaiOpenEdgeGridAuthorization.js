@@ -79,6 +79,11 @@ function getSignature(key, request, authorization) {
   var parts = parseuri(request.url);
 
   var value = request.method + '\thttps\t' + parts.host + '\t' + parts.path + '\t\t';
+  
+  if(parts.query) {
+    value = request.method + '\thttps\t' + parts.host + '\t' + parts.path + '?' + parts.query +  '\t\t';
+  }
+  
   if (request.method === 'POST') {
     value += hash256(request.body);
   }
